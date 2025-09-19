@@ -222,7 +222,7 @@ class KungfuCoreConan(ConanFile):
         parallel_opt = (
             []
             if tools.detected_os() == "Windows"
-            else ["--", "-j", f"{os.cpu_count()}"]
+            else ["--", "-j", f"{os.cpu_count()//2}"]
         )
         self.__enable_modules(runtime)
         if str(self.options.with_yarn) == "True":
@@ -274,7 +274,7 @@ class KungfuCoreConan(ConanFile):
         }
         log_level = spdlog_levels[str(self.options.log_level)]
 
-        parallel_level = os.cpu_count()
+        parallel_level = os.cpu_count() // 2
 
         python_path = (
             subprocess.Popen(["pipenv", "--py"], stdout=subprocess.PIPE)

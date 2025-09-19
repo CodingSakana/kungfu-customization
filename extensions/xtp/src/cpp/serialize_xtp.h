@@ -2,6 +2,7 @@
 #define KUNGFU_SERIALIZE_XTP_H
 #include <nlohmann/json.hpp>
 #include <xtp_api_struct.h>
+#include "fast_dump.hpp"
 namespace nlohmann {
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(XTPQueryOrderRsp, order_xtp_id, order_client_id, order_cancel_client_id,
                                    order_cancel_xtp_id, ticker, market, price, quantity, price_type, side,
@@ -36,7 +37,7 @@ namespace kungfu::wingchun::xtp {
 template <typename T> std::string to_string(const T &ori) {
   nlohmann::json j;
   to_json(j, ori);
-  return j.dump();
+  return fast_dump(j);
 }
 } // namespace kungfu::wingchun::xtp
 #endif

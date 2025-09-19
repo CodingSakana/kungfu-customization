@@ -460,7 +460,7 @@ class ParallelCompile(object):
 
             if threads == 0:
                 try:
-                    threads = multiprocessing.cpu_count()
+                    threads = multiprocessing.cpu_count()//2
                     threads = self.max if self.max and self.max < threads else threads
                 except NotImplementedError:
                     threads = 1
